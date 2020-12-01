@@ -5,11 +5,8 @@ from os import path
 import sys
 import socket
 
-# pygame.init()
-# set window
 
 
-# player Index in players array
 
 
 run = False
@@ -331,14 +328,13 @@ class GameMap:
     # adds the task bar image onto the screen
     def taskBar(self, progress):
         # length of finished tasks adds on to the taskbar
-        load = 18 * progress
+        load = 25 * progress
         bar = pygame.Rect(0, 0, load, 25)
         pygame.draw.rect(win, [20, 100, 20], bar)
         win.blit(self.barimage, [0, 0])
 
     def players_win(self):
         print("players win!")
-
     def killer_win(self):
         print("killer wins!")
 
@@ -656,6 +652,7 @@ class Map:
             pygame.draw.rect(win, (255, 0, 0), (890 + (kl.x / 7),
                                                 10 + (kl.y / 7), kl.width / 7, kl.height / 7))
 
+
 # helper function to provide distance between two centerpoints
 def distance(a, b):
     points1 = a.centerPoint()
@@ -891,7 +888,7 @@ def gameLoop(message):
         b.taskBar(len(finished)) # updates task progress
         s.createMap() # create mini map
         s.showPlayers(c) # show players in mini map
-        s.showTraps(k[0].active_traps) # show traps in mini map
+        #s.showTraps(k[0].active_traps) # show traps in mini map
         s.showKillers(k) # show killers in mini map
 
         if len(k[0].active_traps) != 0: # draw active traps
@@ -922,7 +919,7 @@ def gameLoop(message):
         if crewMate == True: # crewmates solve tasks if theyre within distance
             for task in tasks:
                 region = distance(players[playerIndx], task)
-                if region < 50:
+                if region < 50 and players[playerIndx].alive == True:
                     task.active = True
                     task.loadPage()
                     task.displayTask()
@@ -990,7 +987,7 @@ def gameLoop(message):
         for player in players:
             player.drawPlayer()
         #print("win check")
-        if len(finished) >= 27 or (pygame.time.get_ticks()-start_ticks >= 1000*60*10):
+        if len(finished) >= 20 or (pygame.time.get_ticks()-start_ticks >= 1000*60*10):
             b.players_win()
             endGame(True)
             pygame.quit()
