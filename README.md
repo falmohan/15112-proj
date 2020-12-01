@@ -11,10 +11,10 @@ Project is created with:
 * 
 	
 ## Setup
-To run this project, install:
-pip install python-socketio
-pip install "python-socketio[client]"
-pip install pygame
-pip install aiohttp
+* To run this project, install:
+* pip install python-socketio
+* pip install "python-socketio[client]"
+* pip install pygame
+* pip install aiohttp
 
 ```
